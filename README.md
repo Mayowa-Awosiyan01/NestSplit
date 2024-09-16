@@ -1,6 +1,7 @@
-# nestsplit
+# Nestsplit
 
-A new Flutter project.
+The idea behind this project is to create a mobile application that helps households keep track of things like who owes who,
+who's turn it is to do what chore, and more!
 
 ## Getting Started
 
