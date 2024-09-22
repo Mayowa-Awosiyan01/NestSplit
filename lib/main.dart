@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -67,6 +69,7 @@ class MyHomePage extends StatelessWidget {
               "WELCOME TO NESTSPLIT!",
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
+            Image.asset('assets/logo.png'),
             const SizedBox(
               height: 55.0,
             ),
