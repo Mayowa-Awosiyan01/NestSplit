@@ -1,8 +1,15 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-void main() {
+Future<void> main() async {
+  await dotenv.load(fileName: 'process.env');
+  String dbURL = dotenv.env['supabaseURL'] as String;
+  String anonKey = dotenv.env['supabaseANONKey'] as String;
+  await Supabase.initialize(
+    url: dbURL,
+    anonKey: anonKey,
+  );
   runApp(const MyApp());
 }
 
