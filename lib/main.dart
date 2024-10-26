@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:nestsplit/login.dart';
+import 'package:nestsplit/signup.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
@@ -90,7 +92,7 @@ class MyHomePage extends StatelessWidget {
                 ),
                 Expanded(
                   child: ElevatedButton(
-                    onPressed: login(),
+                    onPressed: login(context),
                     child: const Text("Login"),
                   ),
                 ),
@@ -99,7 +101,7 @@ class MyHomePage extends StatelessWidget {
                 ),
                 Expanded(
                   child: ElevatedButton(
-                    onPressed: login(),
+                    onPressed: signUp(context),
                     child: const Text("Sign Up"),
                   ),
                 ),
@@ -112,4 +114,12 @@ class MyHomePage extends StatelessWidget {
   }
 }
 
-login() {}
+login(BuildContext context) {
+  Navigator.push(
+      context, MaterialPageRoute(builder: (context) => const Login()));
+}
+
+signUp(BuildContext context) {
+  Navigator.push(
+      context, MaterialPageRoute(builder: (context) => const Signup()));
+}
