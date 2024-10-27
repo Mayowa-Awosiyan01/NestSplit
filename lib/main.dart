@@ -120,6 +120,5 @@ login(BuildContext context) {
 }
 
 signUp(BuildContext context) {
-  Navigator.push(
-      context, MaterialPageRoute(builder: (context) => const Signup()));
+  Navigator.push(context, MaterialPageRoute(builder: (context) => Signup()));
 }
