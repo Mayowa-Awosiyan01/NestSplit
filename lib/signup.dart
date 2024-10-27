@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
-class Signup extends StatefulWidget {
-  const Signup({super.key});
+class Signup extends StatelessWidget {
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  //final TextEditingController retypeController = TextEditingController();
 
-  @override
-  State<Signup> createState() => _SignupState();
-}
+  final supabase = Supabase.instance.client;
+  Signup({super.key});
 
-class _SignupState extends State<Signup> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,30 +23,38 @@ class _SignupState extends State<Signup> {
         title: const Text("NestSplit"),
         leading: Image.asset("assets/favicon.png"),
       ),
-      body: Center(
-        child: Column(
-          children: [
-            TextFormField(
-              autocorrect: false,
-              autofocus: true,
-              obscureText: false,
-              decoration: const InputDecoration(
-                  hintText: "Email", prefixIcon: Icon(Icons.mail_outline)),
-            ),
-            TextFormField(
-              autocorrect: false,
-              obscureText: true,
-              decoration: const InputDecoration(
-                  hintText: "Password", prefixIcon: Icon(Icons.key_outlined)),
-            ),
-            TextFormField(
-              autocorrect: false,
-              obscureText: true,
-              decoration: const InputDecoration(
-                  hintText: "Re-type Password",
-                  prefixIcon: Icon(Icons.key_outlined)),
-            )
-          ],
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Center(
+          child: Column(
+            children: [
+              TextFormField(
+                controller: emailController,
+                autocorrect: false,
+                autofocus: true,
+                obscureText: false,
+                decoration: const InputDecoration(
+                    hintText: "Email", prefixIcon: Icon(Icons.mail_outline)),
+              ),
+              TextFormField(
+                controller: passwordController,
+                autocorrect: false,
+                obscureText: true,
+                decoration: const InputDecoration(
+                    hintText: "Password", prefixIcon: Icon(Icons.key_outlined)),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              ElevatedButton(
+                  onPressed: () async {
+                    final response = await supabase.auth.signUp(
+                        password: passwordController.text,
+                        email: emailController.text);
+                  },
+                  child: const Text("Sign Up Now!"))
+            ],
+          ),
         ),
       ),
     );
