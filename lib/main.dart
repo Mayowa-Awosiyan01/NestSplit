@@ -5,7 +5,9 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 Future<void> main() async {
-  await dotenv.load(fileName: 'process.env');
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await dotenv.load(fileName: ".env");
   String dbURL = dotenv.env['supabaseURL'] as String;
   String anonKey = dotenv.env['supabaseANONKey'] as String;
   await Supabase.initialize(
@@ -92,7 +94,12 @@ class MyHomePage extends StatelessWidget {
                 ),
                 Expanded(
                   child: ElevatedButton(
-                    onPressed: login(context),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const Login()));
+                    },
                     child: const Text("Login"),
                   ),
                 ),
@@ -101,7 +108,10 @@ class MyHomePage extends StatelessWidget {
                 ),
                 Expanded(
                   child: ElevatedButton(
-                    onPressed: signUp(context),
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => Signup()));
+                    },
                     child: const Text("Sign Up"),
                   ),
                 ),
@@ -112,13 +122,4 @@ class MyHomePage extends StatelessWidget {
       ),
     ); // This trailing comma makes auto-formatting nicer for build methods.
   }
-}
-
-login(BuildContext context) {
-  Navigator.push(
-      context, MaterialPageRoute(builder: (context) => const Login()));
-}
-
-signUp(BuildContext context) {
-  Navigator.push(context, MaterialPageRoute(builder: (context) => Signup()));
 }
